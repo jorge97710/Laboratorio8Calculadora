@@ -1,0 +1,73 @@
+textarea { font-size: 50px;
+
+overflow: hidden;
+    position: fixed;
+    top:42%;
+    left: 51%;
+    margin-top: -8.5%;
+    margin-left: -15.75%;
+    border: 0px;
+    background-color: black;
+    color: white;
+    resize: both;
+    z-index:1;
+}
+
+body {
+    background-color: black;
+    
+ }
+
+ h1{
+     color:white;
+     text-align: center;
+ }
+ 
+
+#numpad{
+    height: 50%;
+    width: 22%;
+    background-color: black;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+    z-index:1;    
+    }
+
+#ButtonNumero{
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    background-color: 	#353535;
+    border: 0px;
+    font-size: 150%;
+    color: white;
+}
+
+#ButtonOP{
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    background-color: #ED9127;
+    border: 0px;
+    font-size: 150%;
+    color: white;
+}
+
+#ButtonOpExtra{
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    background-color: #B5B5B5
+    ;
+    border: 0px;
+    font-size: 150%;
+    color: white;
+}
+
+#Board{
+
+    text-align: right;
+}

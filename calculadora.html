@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<link rel="stylesheet" href="styles.css">
+
+<head>
+
+    <title>Laboratorio #8</title>
+
+</head>
+<script> var num1 = 0;
+    var sum = 0;
+    var resultado = 0;
+    var altern = 0;
+    var res = 0;
+    var mod = 0;
+    var mul = 0;
+    var div = 0;
+    var num2 = 0;
+    var ingresados = 0;
+    var oper = 0;
+    var actual = "";</script>
+
+<body>
+    <header>
+        <h1>iCalc (Laboratorio #8)</h1>
+    </header>
+
+    <div>
+        <form>
+            <div style="width:10%; height: 20%;">
+                <textarea readonly style="width:21.7%; height:10%;" id="Board" name="Text1" cols="23" rows="1"
+                    placeholder="0" maxlength="9"></textarea>
+                <table id=numpad>
+                    <tr>
+                        <th><input id="ButtonOpExtra" type="button" value="AC" onclick=AC()></th>
+                        <th><input id="ButtonOpExtra" type="button" value="mod" onclick=MOD()></th>
+                        <th><input id="ButtonOpExtra" type="button" value="_" onclick=AgregarNumero()></th>
+                        <th><input id="ButtonOpExtra" type="button" value="/" onclick=division()></th>
+                    </tr>
+                    <tr>
+                        <th><input id="ButtonNumero" type="button" value="7" onclick=AgregarNumero(7)></th>
+                        <th><input id="ButtonNumero" type="button" value="8" onclick=AgregarNumero(8)></th>
+                        <th><input id="ButtonNumero" type="button" value="9" onclick=AgregarNumero(9)></th>
+                        <th><input id="ButtonOP" type="button" value="x" onclick=multiplicacion()></th>
+                    </tr>
+                    <tr>
+                        <th><input id="ButtonNumero" type="button" value="4" onclick=AgregarNumero(4)></th>
+                        <th><input id="ButtonNumero" type="button" value="5" onclick=AgregarNumero(5)></th>
+                        <th><input id="ButtonNumero" type="button" value="6" onclick=AgregarNumero(6)></th>
+                        <th><input id="ButtonOP" type="button" value="-" onclick=resta()></th>
+                    </tr>
+                    <tr>
+                        <th><input id="ButtonNumero" type="button" value="1" onclick=AgregarNumero(1)></th>
+                        <th><input id="ButtonNumero" type="button" value="2" onclick=AgregarNumero(2)></th>
+                        <th><input id="ButtonNumero" type="button" value="3" onclick=AgregarNumero(3)></th>
+                        <th><input id="ButtonOP" type="button" value="+" onclick=suma()></th>
+                    </tr>
+                    <tr>
+                        <th><input id="ButtonNumero" type="button" value="0" onclick=AgregarNumero(0)></th>
+                        <th><input id="ButtonNumero" type="button" value="." onclick=DOT()></th>
+                        <th><input id="ButtonOP" type="button" value="=" onclick=igual()></th>
+                    </tr>
+                </table>
+            </div>
+            <script>
+
+                //let test = 0.1;
+                console.log("PRUEBA CON DECIMAL: " + (0.1 + 0.4));
+                var pruebadecimal = "1";
+                var pruebaenint = parseFloat(pruebadecimal, 10);
+                console.log("PRUEBA CONVERTIDA: " + (pruebaenint + 0.3));
+                function AgregarNumero(x) {
+                    //var lenght =document.getElementById("Board").textContent.length
+                    console.log("el board tiene: " + ingresados);
+                    if (sum == 0 && res == 0 && div == 0 && mul == 0) {
+                        if (ingresados == 0 || ingresados < 9) {
+                            ingresados = ingresados + 1;
+                            console.log("Estoy agregando el numero");
+                            var texto = document.getElementById("Board").value;
+                            console.log("Lo que tiene el textarea es: " + texto);
+                            var n = x.toString();
+                            actual = texto + n;
+                            console.log("Lo acumulado es: (prueba)" + parseFloat(actual, 10));
+                            document.getElementById("Board").value = actual;
+                            console.log("El numero que viene es:" + (x));
+                            console.log("num2: " + num2);
+                        }
+                    }
+                    //cuando es el segundo numero
+                    if (sum == 1 || res == 1 || div == 1 || mul == 1) {
+                        if (altern == 1) {
+                            document.getElementById("Board").value = "";
+                            altern = 0;
+                        }
+                        if (ingresados == 0 || ingresados < 9) {
+                            //document.getElementById("Board").value = "";
+                            ingresados = ingresados + 1;
+                            console.log("Estoy agregando el numero Cuando tengo0 la primera asi");
+                            var texto = document.getElementById("Board").value;
+                            console.log("Lo que tiene el textarea es: " + texto);
+                            var n = x.toString();
+                            var actual = texto + n;
+                            console.log("Lo acumulado es: (prueba)" + parseFloat(actual, 10));
+                            document.getElementById("Board").value = actual;
+                            console.log("El numero que viene es:" + (x));
+                            console.log("num2: " + num2);
+                        }
+                    }
+                    //document.getElementById("Board").value = "";
+                }
+
+                function DOT() {
+                    var temp = document.getElementById("Board").value;
+                    var modificada = temp + ".";
+                    document.getElementById("Board").value = modificada;
+                }
+
+                function AC() {
+                    num1 = 0;
+                    num2 = 0;
+                    oper = 0;
+                    sum = 0;
+                    res = 0;
+                    div = 0;
+                    mul = 0;
+                    mod = 0;
+                    resultado = 0;
+                    ingresados = 0;
+                    document.getElementById("Board").value = "";
+                }
+
+                function suma() {
+                    if (sum == 0 && res == 0 && div == 0 && mul == 0) {
+                        console.log("____________________________SUMA NORMAL_________________");
+                        sum = 1;
+                        res = 0;
+                        div = 0;
+                        mul = 0;
+                        mod = 0;
+                        ingresados = 0;
+                        //if(num2==0){
+                        var numero = document.getElementById("Board").value;
+                        num1 = parseFloat(numero, 10);
+                        console.log("Lo acumulado es: (prueba)" + parseFloat(numero, 10));
+                        console.log("num1: " + num1);
+                        console.log("num2: " + num2);
+                        document.getElementById("Board").value = "";
+                        actual = "";
+                    } else {
+                        console.log("____________________________SUMA alt_________________");
+                        igualalt();
+                        sum = 1;
+                        res = 0;
+                        div = 0;
+                        mul = 0;
+                        mod = 0;
+                    }
+                    console.log("Se activa suma");
+                    console.log("El numero 1 es" + num1);
+                    console.log("El numero 2 es" + num2);
+                }
+
+                function MOD() {
+                    if (sum == 0 && res == 0 && div == 0 && mul == 0) {
+                        sum = 0;
+                        res = 0;
+                        div = 0;
+                        mul = 0;
+                        mod = 1;
+                        ingresados = 0;
+                        //if(num2==0){
+                        var numero = document.getElementById("Board").value;
+                        num1 = parseFloat(numero, 10);
+                        console.log("Lo acumulado es: (prueba)" + parseFloat(numero, 10));
+                        console.log("num1: " + num1);
+                        console.log("num2: " + num2);
+                        document.getElementById("Board").value = "";
+                        actual = "";
+                        //}else{
+
+                        //} } else {
+                    } else {
+                        console.log("____________________________SUMA alt_________________");
+                        igualalt();
+                        sum = 0;
+                        res = 0;
+                        div = 0;
+                        mul = 0;
+                        mod = 1;
+                    }
+                    console.log("Se activa modulo");
+                }
+
+                function resta() {
+                    if (sum == 0 && res == 0 && div == 0 && mul == 0) {
+
+                        sum = 0;
+                        res = 1;
+                        div = 0;
+                        mul = 0;
+                        mod = 0;
+                        ingresados = 0;
+                        //if(num2==0){
+                        var numero = document.getElementById("Board").value;
+                        num1 = parseFloat(numero, 10);
+                        console.log("Lo acumulado es: (prueba)" + parseFloat(numero, 10));
+                        console.log("num1: " + num1);
+                        console.log("num2: " + num2);
+                        document.getElementById("Board").value = "";
+
+                        actual = "";
+                        //}else{
+
+                        //}
+                    } else {
+                        console.log("____________________________SUMA alt_________________");
+                        igualalt();
+                        sum = 0;
+                        res = 1;
+                        div = 0;
+                        mul = 0;
+                        mod = 0;
+                    }
+                    console.log("Se activa resta");
+                }
+
+                function multiplicacion() {
+                    if (sum == 0 && res == 0 && div == 0 && mul == 0) {
+                        sum = 0;
+                        res = 0;
+                        div = 0;
+                        mul = 1;
+                        mod = 0;
+                        ingresados = 0;
+                        //if(num2==0){
+                        var numero = document.getElementById("Board").value;
+                        num1 = parseFloat(numero, 10);
+                        console.log("Lo acumulado es: (prueba)" + parseFloat(numero, 10));
+                        console.log("num1: " + num1);
+                        console.log("num2: " + num2);
+                        document.getElementById("Board").value = "";
+                        actual = "";
+                        //}else{
+                        //}
+                    } else {
+                        console.log("____________________________SUMA alt_________________");
+                        igualalt();
+                        sum = 0;
+                        res = 0;
+                        div = 0;
+                        mul = 1;
+                        mod = 0;
+                    }
+                    console.log("Se activa multiplicacion");
+                }
+
+                function division() {
+                    if (sum == 0 && res == 0 && div == 0 && mul == 0) {
+                        sum = 0;
+                        res = 0;
+                        div = 1;
+                        mod = 0;
+                        mul = 0;
+                        ingresados = 0;
+                        //if(num2==0){
+                        var numero = document.getElementById("Board").value;
+                        num1 = parseFloat(numero, 10);
+                        console.log("Lo acumulado es: (prueba)" + parseFloat(numero, 10));
+                        console.log("num1: " + num1);
+                        console.log("num2: " + num2);
+                        document.getElementById("Board").value = "";
+                        actual = "";
+                        //}else{
+                        //}
+                    } else {
+                        console.log("____________________________SUMA alt_________________");
+                        igualalt();
+                        sum = 0;
+                        res = 0;
+                        div = 1;
+                        mod = 0;
+                        mul = 0;
+                    }
+                    console.log("Se activa division");
+                }
+
+                function igual() {
+                    if (sum == 1) {
+                        console.log("Suma");
+                        console.log("num1: " + num1);
+                        var numero = document.getElementById("Board").value;
+                        num2 = parseFloat(numero, 10);
+                        console.log("num2: " + num2);
+                        resultado = num1 + num2;
+                        console.log("Resultado: " + resultado);
+                        document.getElementById("Board").value = resultado;
+                    }
+                    if (res == 1) {
+                        console.log("Resta");
+                        console.log("num1: " + num1);
+                        var numero = document.getElementById("Board").value;
+                        num2 = parseFloat(numero, 10);
+                        console.log("num2: " + num2);
+                        resultado = num1 - num2;
+                        console.log("Resultado: " + resultado);
+                        if (resultado < 0) {
+                            document.getElementById("Board").value = "ERROR";
+                        } else {
+                            document.getElementById("Board").value = resultado;
+                        }
+                    }
+                    if (mul == 1) {
+                        console.log("Multiplicacion");
+                        console.log("num1: " + num1);
+                        var numero = document.getElementById("Board").value;
+                        num2 = parseFloat(numero, 10);
+                        console.log("num2: " + num2);
+                        resultado = num1 * num2;
+                        console.log("Resultado: " + resultado);
+                        document.getElementById("Board").value = resultado;
+                    }
+                    if (div == 1) {
+                        console.log("Division");
+                        console.log("num1: " + num1);
+                        var numero = document.getElementById("Board").value;
+                        num2 = parseFloat(numero, 10);
+                        console.log("num2: " + num2);
+                        resultado = num1 / num2;
+                        resultado = resultado.toFixed(2);
+                        console.log("Resultado: " + resultado);
+                        document.getElementById("Board").value = resultado;
+                    }
+                    if (mod == 1) {
+                        console.log("Modulo");
+                        console.log("num1: " + num1);
+                        var numero = document.getElementById("Board").value;
+                        num2 = parseFloat(numero, 10);
+                        console.log("num2: " + num2);
+                        resultado = num1 % num2;
+                        //  resultado=resultado.toFixed(2);
+                        console.log("Resultado: " + resultado);
+                        document.getElementById("Board").value = resultado;
+                    }
+                    num1 = 0;
+                    num2 = 0;
+                    oper = 0;
+                    sum = 0;
+                    res = 0;
+                    div = 0;
+                    mul = 0;
+                    mod = 0;
+                    resultado = 0;
+                    ingresados = 0;
+                }
+
+                function igualalt() {
+                    altern = 1;
+                    if (sum == 1) {
+                        console.log("Suma");
+                        console.log("num1: " + num1);
+                        var numero = document.getElementById("Board").value;
+                        num2 = parseFloat(numero, 10);
+                        console.log("num2: " + num2);
+                        resultado = num1 + num2;
+                        console.log("Resultado: " + resultado);
+                        document.getElementById("Board").value = resultado;
+                    }
+                    if (res == 1) {
+                        console.log("Resta");
+                        console.log("num1: " + num1);
+                        var numero = document.getElementById("Board").value;
+                        num2 = parseFloat(numero, 10);
+                        console.log("num2: " + num2);
+                        resultado = num1 - num2;
+                        console.log("Resultado: " + resultado);
+                        if (resultado < 0) {
+                            document.getElementById("Board").value = "ERROR";
+                        } else {
+                            document.getElementById("Board").value = resultado;
+                        }
+                    }
+                    if (mul == 1) {
+                        console.log("Multiplicacion");
+                        console.log("num1: " + num1);
+                        var numero = document.getElementById("Board").value;
+                        num2 = parseFloat(numero, 10);
+                        console.log("num2: " + num2);
+                        resultado = num1 * num2;
+                        console.log("Resultado: " + resultado);
+                        document.getElementById("Board").value = resultado;
+                    }
+                    if (div == 1) {
+                        console.log("Division");
+                        console.log("num1: " + num1);
+                        var numero = document.getElementById("Board").value;
+                        num2 = parseFloat(numero, 10);
+                        console.log("num2: " + num2);
+                        resultado = num1 / num2;
+                        resultado = resultado.toFixed(2);
+                        console.log("Resultado: " + resultado);
+                        document.getElementById("Board").value = resultado;
+                    }
+                    if (mod == 1) {
+                        console.log("Modulo");
+                        console.log("num1: " + num1);
+                        var numero = document.getElementById("Board").value;
+                        num2 = parseFloat(numero, 10);
+                        console.log("num2: " + num2);
+                        resultado = num1 % num2;
+                        //  resultado=resultado.toFixed(2);
+                        console.log("Resultado: " + resultado);
+                        document.getElementById("Board").value = resultado;
+                    }
+                    num1 = resultado;
+                }
+            </script>
+        </form>
+    </div>
+</body>
+
+</html>
